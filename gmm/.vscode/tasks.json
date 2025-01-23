@@ -1,0 +1,55 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: g++ build active file",
+			"command": "/opt/homebrew/bin/g++",
+			"args": [
+				"-std=c++17",
+				"-fdiagnostics-color=always",
+				"-Wall",
+				"-g",
+				"-I${workspaceFolder}/dependencies/include",
+				"-L${workspaceFolder}/dependencies/library",
+				"${workspaceFolder}/dependencies/library/libglfw.3.4.dylib",
+				"${file}",
+				"${workspaceFolder}/glad.c",
+				"-o",
+				"${workspaceFolder}/${fileBasenameNoExtension}",
+				"-framework",
+				"OpenGL",
+				"-framework",
+				"Cocoa",
+				"-framework",
+				"IOKit",
+				"-framework",
+				"CoreVideo",
+				"-framework",
+				"CoreFoundation",
+				"-Wno-deprecated",
+				"-DGL_SILENCE_DEPRECATION"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "compiler: /opt/homebrew/bin/g++"
+		},
+		{
+			"label": "Clean Build Artifacts",
+			"type": "shell",
+			"command": "find /Users/saptarshiadhikari/Desktop/labs/gmm \\( -type d -name \"*.dSYM\" -o -type f -perm -u+x \\) -exec rm -rf {} +",
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			}
+		}
+	]
+}
