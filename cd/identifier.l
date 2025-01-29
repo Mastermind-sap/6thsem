@@ -7,20 +7,20 @@ KEYWORD (auto|break|case|char|const|continue|default|do|double|else|enum|extern|
 %%
 
 {KEYWORD} { 
-    printf("%s is not a valid identifier \n", yytext); 
+    printf("%s is a keyword \n", yytext); 
 }
 [a-zA-Z_][a-zA-Z0-9_]* {
     printf("%s is a valid identifier \n", yytext);
 }
 .+ {
-    printf("%s is not a valid identifier\n", yytext);
+    printf("%s is not a valid identifier or keyword\n", yytext);
 }
 %%
 
 int yywrap() { return 1; }
 
 int main(){
-    printf("Enter the identifier name:\n");
+    printf("Enter a string:\n");
     yylex();
     return 0;
 }

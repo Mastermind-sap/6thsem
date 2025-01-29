@@ -828,7 +828,7 @@ case 1:
 YY_RULE_SETUP
 #line 9 "identifier.l"
 { 
-    printf("%s is not a valid identifier \n", yytext); 
+    printf("%s is a keyword \n", yytext); 
 }
 	YY_BREAK
 case 2:
@@ -1861,7 +1861,7 @@ void yyfree (void * ptr )
 int yywrap() { return 1; }
 
 int main(){
-    printf("Enter the identifier name:\n");
+    printf("Enter a string:\n");
     yylex();
     return 0;
 }
