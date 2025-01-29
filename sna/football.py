@@ -16,6 +16,16 @@ cent = {
     "Eigenvector": (nx.eigenvector_centrality(G), plt.cm.summer)
 }
 
+# Print centralities in table format
+print(f"{'Node':<30} | {'Degree':<25} | {'Betweenness':<25} | {'Eigenvector':<25}")
+print("-" * 110)
+for node in G.nodes():
+    degree = cent["Degree"][0][node]
+    betweenness = cent["Betweenness"][0][node]
+    eigenvector = cent["Eigenvector"][0][node]
+    print(f"{node:<30} | {degree:<25} | {betweenness:<25} | {eigenvector:<25}")
+print()
+
 def draw(ax, cent, title, cmap):
     n_color = [cent[n] for n in G.nodes()]
     n_size = [5000 * cent[n] for n in G.nodes()]  
