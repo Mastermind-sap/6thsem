@@ -2,67 +2,52 @@
 #include <cmath>
 #include <iostream>
 
-void drawPixel(float x, float y) {
+void drawPix(float x, float y) {
     glBegin(GL_POINTS);
-    glVertex2f(x / 300.0f, y / 300.0f); // Scale to normalized device coordinates
+    glVertex2f(x / 300.0f, y / 300.0f);
     glEnd();
 }
 
 void drawLineDDA(float x1, float y1, float x2, float y2) {
     float dx = x2 - x1, dy = y2 - y1;
     int steps = std::max(std::abs(dx), std::abs(dy));
-    float xIncrement = dx / steps, yIncrement = dy / steps;
-
+    float xInc = dx / steps, yInc = dy / steps;
     float x = x1, y = y1;
     for (int i = 0; i <= steps; ++i) {
-        drawPixel(x, y);
-        x += xIncrement;
-        y += yIncrement;
+        drawPix(x, y);
+        x += xInc;
+        y += yInc;
     }
 }
 
-void drawScene() {
+void drawScn(float x1, float y1, float x2, float y2) {
     glClear(GL_COLOR_BUFFER_BIT);
-
-    // Draw axes
-    glLineWidth(2.0f); // Thicker axes
-    glColor3f(0.0, 0.0, 1.0); // Blue
+    glLineWidth(2); glColor3f(0, 0, 1);
     glBegin(GL_LINES);
-    glVertex2f(-1.0f, 0.0f); glVertex2f(1.0f, 0.0f); // X-axis
-    glVertex2f(0.0f, -1.0f); glVertex2f(0.0f, 1.0f); // Y-axis
+    glVertex2f(-1, 0); glVertex2f(1, 0);
+    glVertex2f(0, -1); glVertex2f(0, 1);
     glEnd();
-
-    // Draw lines for testing
-    glColor3f(1.0, 0.0, 0.0); // Red
-    glPointSize(15.0f);        // Increase point size for DDA pixels
-    drawLineDDA(-200, -100, 200, 100);  // m > 0
-    drawLineDDA(-200, 0, 200, 0);       // m = 0
-    drawLineDDA(200, 100, 200, -100);   // m < 0
+    glColor3f(1, 0, 0); glPointSize(15);
+    drawLineDDA(x1, y1, x2, y2);
 }
 
 int main() {
-    if (!glfwInit()) {
-        std::cerr << "Failed to initialize GLFW\n";
-        return -1;
-    }
+    float x1, y1, x2, y2;
+    std::cout << "Enter the initial end-point (x1, y1): ";
+    std::cin >> x1 >> y1;
+    std::cout << "Enter the final end-point (x2, y2): ";
+    std::cin >> x2 >> y2;
 
-    GLFWwindow* window = glfwCreateWindow(600, 600, "DDA Line Drawing Algorithm", nullptr, nullptr);
-    if (!window) {
-        std::cerr << "Failed to create GLFW window\n";
-        glfwTerminate();
-        return -1;
-    }
-
-    glfwMakeContextCurrent(window);
-
-    while (!glfwWindowShouldClose(window)) {
-        glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // White background
-        drawScene();
-        glfwSwapBuffers(window);
+    glfwInit();
+    GLFWwindow *win = glfwCreateWindow(600, 600, "Saptarshi Adhikari 2212072", nullptr, nullptr);
+    glfwMakeContextCurrent(win);
+    glClearColor(1, 1, 1, 1);
+    while (!glfwWindowShouldClose(win)) {
+        drawScn(x1, y1, x2, y2);
+        glfwSwapBuffers(win);
         glfwPollEvents();
     }
-
-    glfwDestroyWindow(window);
+    glfwDestroyWindow(win);
     glfwTerminate();
     return 0;
 }
