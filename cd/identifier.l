@@ -13,7 +13,7 @@ KEYWORD (auto|break|case|char|const|continue|default|do|double|else|enum|extern|
     printf("%s is a valid identifier \n", yytext);
 }
 .+ {
-    printf("%s is not a valid identifier or keyword\n", yytext);
+    printf("%s is not a valid identifier nor a keyword\n", yytext);
 }
 %%
 
