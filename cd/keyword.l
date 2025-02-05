@@ -11,7 +11,7 @@ SYMBOL (\$|@|#|\.|\?|,|;|`|\\)
     printf("%s is a keyword \n", yytext);
 }
 {OPERATOR} {
-    printf("%s is a operator \n", yytext);
+    printf("%s is an operator \n", yytext);
 }
 {SYMBOL} {
     printf("%s is a symbol \n", yytext);
