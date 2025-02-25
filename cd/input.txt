@@ -1,0 +1,9 @@
+http://example.
+https://secure
+http://subdomain.example.com/path?query=1
+
+192.168.0.1
+10.0.0.1
+2001:0000:3238:DFE1:0063:0000:0000:FEFB
+2001:0000:3238:DFE1:0063:0000:0000:AFNS
+172.16.254.1
